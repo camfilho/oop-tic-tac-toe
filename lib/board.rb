@@ -5,21 +5,39 @@ class Board
   end
 
   def display_board
-    i = 1
-    board.each do |item|
-      print " " + item.to_s + " |"
-      i += 1
-      if i > 3
-        print "\n"
-        i = 1
-      end
-    end
+      puts " "
+      puts " #{board[0]}  |  #{board[1]}  |  #{board[2]}"
+      puts "----|-----|-----"
+      puts " #{board[3]}  |  #{board[4]}  |  #{board[5]}"
+      puts "----|-----|-----"
+      puts " #{board[6]}  |  #{board[7]}  |  #{board[8]}"
+      puts " "
   end
 
   def move(type, coordinate)
-    board[coordinate - 1] = type
+    if empty?(coordinate)
+      board[coordinate - 1] = type
+      display_board
+    else
+      raise "Exception: Coordinate not Empty"
+    end
   end
+
+  def empty?(coordinate)
+    if board[coordinate - 1] == "x" || board[coordinate - 1] == "o"
+      return false
+    else
+      true
+    end
+  end
+
 end
+
 
 board = Board.new
 board.display_board
+board.move("x",5)
+board.move("o",1)
+board.move("x",5)
+
+
