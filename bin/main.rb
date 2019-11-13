@@ -15,27 +15,31 @@ puts "Let's start"
 turn = 0
 winner = false
 while turn < 9
-  puts "#{x_player}, it's your turn. Select a square from 1 to 9"
-  move = gets.chomp
-  turn += 1
-  puts "Your move was added to the board"
-  if winner
-    winner_name = x_player
-    break
+  begin
+    puts "It's #{current_player}'s turn. Select a square from #{available_squares}"
+    move = gets.chomp
+    add_move(move)
+  rescue => exception
+      puts "Invalid move, try again"
+      retry
+  else
+    turn += 1
+    puts "Your move was added to the board"
+    puts display_board
   end
-
-  puts "#{o_player}, it's your turn. Select a square from 1 to 9"
-  move = gets.chomp
-  turn += 1
-  puts "Your move was added to the board"
+ 
+  winner = check_winner(current_player)
+  
   if winner
-    winner_name = o_player
+    winner_name = current_player
     break
+  else
+    switch_player
   end
 end
 
 if turn > 8
     puts "It's a tie"
 else 
-    puts "The winner is #{winner_name}"
+    puts "The winner is #{current_player}"
 end
