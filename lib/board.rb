@@ -9,13 +9,13 @@ class Board
   end
 
   def display_board
-      puts " "
-      puts " #{board[0]}  |  #{board[1]}  |  #{board[2]}"
-      puts "----|-----|-----"
-      puts " #{board[3]}  |  #{board[4]}  |  #{board[5]}"
-      puts "----|-----|-----"
-      puts " #{board[6]}  |  #{board[7]}  |  #{board[8]}"
-      puts " "
+    puts ' '
+    puts " #{board[0]}  |  #{board[1]}  |  #{board[2]}"
+    puts '----|-----|-----'
+    puts " #{board[3]}  |  #{board[4]}  |  #{board[5]}"
+    puts '----|-----|-----'
+    puts " #{board[6]}  |  #{board[7]}  |  #{board[8]}"
+    puts ' '
   end
 
   def rows
@@ -39,23 +39,16 @@ class Board
   end
 
   def move(type, coordinate)
-    if empty?(coordinate)
-      board[coordinate - 1] = type
-      display_board
-      avail_squares.delete(coordinate)
-    else
-      raise "Exception: Coordinate not Empty"
-    end
+    raise 'Exception: Wrong coordinates' unless empty?(coordinate)
+
+    board[coordinate - 1] = type
+    display_board
+    avail_squares.delete(coordinate)
   end
 
   def empty?(coordinate)
-    if board[coordinate - 1] == "x" || board[coordinate - 1] == "o"
-      return false
-    else
-      true
-    end
+    return true if avail_squares.any? coordinate
+
+    false
   end
-
 end
-
-

@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+
+# rubocop:disable Metrics/CyclomaticComplexity
+
 require '../lib/users.rb'
 require '../lib/board.rb'
 
@@ -10,8 +13,8 @@ class TicTacToe
   def initialize
     @turn = 0
     @board = Board.new
-    @player_x = Users.new("Luis", "x")
-    @player_o = Users.new("Carlos", "o")
+    @player_x = Users.new('Luis', 'x')
+    @player_o = Users.new('Carlos', 'o')
     @current_player = player_x
   end
 
@@ -24,15 +27,13 @@ class TicTacToe
     end
     board.diagonals.each do |dia|
       return true if dia.all?('x') || dia.all?('o')
-    end 
+    end
     false
   end
 
   def switch_player
-    if current_player == player_x
-      self.current_player = player_o
-    else
-      self.current_player = player_x
-    end
+    self.current_player = current_player == player_x ? player_o : player_x
   end
 end
+
+# rubocop:enable Metrics/CyclomaticComplexity

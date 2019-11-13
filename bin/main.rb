@@ -6,11 +6,11 @@ puts "Welcome to Tic-tac-toe!"
 game = TicTacToe.new
 
 puts "Input x player name:"
-game.player_x.name = gets.chomp
+game.player_x.name = gets.chomp.to_s
 puts "Welcome #{game.player_x.name}"
 
 puts "Input o player name:"
-game.player_o.name = gets.chomp
+game.player_o.name = gets.chomp.to_s
 puts "Welcome #{game.player_o.name}"
 
 puts "Let's start"
@@ -27,10 +27,14 @@ while game.turn < 9
   else
     game.turn += 1
     puts "Your move was added to the board"
+    print "Next turn in..."
+    [3, 2, 1, 0].each do |i|
+      sleep 0.7
+      print "  " + i.to_s
+    end
+    puts ""
   end
- 
   winner = game.check_winner
-  
   if winner
     winner_name = game.current_player
     break
@@ -41,6 +45,6 @@ end
 
 if game.turn > 8
     puts "It's a tie"
-else 
+else
     puts "The winner is #{game.current_player.name}"
 end
