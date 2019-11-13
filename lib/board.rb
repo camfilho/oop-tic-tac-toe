@@ -18,6 +18,20 @@ class Board < TicTacToe
       puts " "
   end
 
+  def rows
+    row1 = [board[0], board[1], board[2]]
+    row2 = [board[3], board[4], board[5]]
+    row3 = [board[6], board[7], board[8]]
+    [row1, row2, row3]
+  end
+
+  def columns
+    col1 = [board[0], board[3], board[6]]
+    col2 = [board[1], board[4], board[7]]
+    col3 = [board[2], board[5], board[8]]
+    [col1, col2, col3]
+  end
+
   def move(type, coordinate)
     if empty?(coordinate)
       board[coordinate - 1] = type
