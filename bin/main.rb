@@ -1,45 +1,50 @@
 #!/usr/bin/env ruby
 
+require '../lib/tic_tac_toe.rb'
+
 puts "Welcome to Tic-tac-toe!"
+game = TicTacToe.new
 
 puts "Input x player name:"
-x_player = gets.chomp
-puts "Welcome #{x_player}"
+game.player_x.name = gets.chomp.to_s
+puts "Welcome #{game.player_x.name}"
 
 puts "Input o player name:"
-o_player = gets.chomp
-puts "Welcome #{o_player}"
+game.player_o.name = gets.chomp.to_s
+puts "Welcome #{game.player_o.name}"
 
 puts "Let's start"
 
-turn = 0
 winner = false
-while turn < 9
+while game.turn < 9
   begin
-    puts "It's #{current_player}'s turn. Select a square from #{available_squares}"
-    move = gets.chomp
-    add_move(move)
-  rescue => exception
-      puts "Invalid move, try again"
-      retry
+    puts "It's #{game.current_player.name}'s turn. Select a square from #{game.board.avail_squares}"
+    move = gets.chomp.to_i
+    game.board.move(game.current_player.type, move) 
+  rescue StandardError => e
+    puts "Invalid move, try again"
+    retry
   else
-    turn += 1
+    game.turn += 1
     puts "Your move was added to the board"
-    puts display_board
+    print "Next turn in..."
+    [3, 2, 1, 0].each do |i|
+      sleep 0.7
+      print "  " + i.to_s
+    end
+    puts ""
   end
- 
-  winner = check_winner(current_player)
-  
+  winner = game.check_winner
   if winner
-    winner_name = current_player
+    winner_name = game.current_player
     break
   else
-    switch_player
+    game.switch_player
   end
 end
 
-if turn > 8
+if game.turn > 8
     puts "It's a tie"
-else 
-    puts "The winner is #{current_player}"
+else
+    puts "The winner is #{game.current_player.name}"
 end
