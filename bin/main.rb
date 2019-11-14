@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-require '../lib/tic_tac_toe.rb'
+require_relative '../lib/board.rb'
+require_relative '../lib/users.rb'
+require_relative '../lib/tic_tac_toe.rb'
 
 puts "Welcome to Tic-tac-toe!"
 game = TicTacToe.new

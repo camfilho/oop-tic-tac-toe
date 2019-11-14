@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Board
-  attr_accessor :board, :avail_squares
+  attr_reader :board, :avail_squares
+  attr_writer :board, :avail_squares
 
   def initialize
     @board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
