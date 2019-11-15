@@ -10,13 +10,12 @@ class Board
   end
 
   def display_board
-    puts ' '
-    puts " #{board[0]}  |  #{board[1]}  |  #{board[2]}"
-    puts '----|-----|-----'
-    puts " #{board[3]}  |  #{board[4]}  |  #{board[5]}"
-    puts '----|-----|-----'
-    puts " #{board[6]}  |  #{board[7]}  |  #{board[8]}"
-    puts ' '
+     line1 = " #{board[0]}  |  #{board[1]}  |  #{board[2]}  "
+     line2 = '----|-----|-----'
+     line3 = " #{board[3]}  |  #{board[4]}  |  #{board[5]}  "
+     line4 = '----|-----|-----'
+     line5 = " #{board[6]}  |  #{board[7]}  |  #{board[8]}  "
+    [line1, line2, line3, line4, line5]
   end
 
   def rows
@@ -43,7 +42,6 @@ class Board
     raise 'Exception: Wrong coordinates' unless empty?(coordinate)
 
     board[coordinate - 1] = type
-    display_board
     avail_squares.delete(coordinate)
   end
 
