@@ -7,11 +7,11 @@ require_relative '../lib/tic_tac_toe.rb'
 puts "Welcome to Tic-tac-toe!"
 game = TicTacToe.new
 
-puts "Input x player name:"
+puts "Select x player name:"
 game.player_x.name = gets.chomp.to_s
 puts "Welcome #{game.player_x.name}"
 
-puts "Input o player name:"
+puts "Select o player name:"
 game.player_o.name = gets.chomp.to_s
 puts "Welcome #{game.player_o.name}"
 
@@ -29,9 +29,10 @@ while game.turn < 9
   else
     game.turn += 1
     puts "Your move was added to the board"
+    puts game.board.display_board
     print "Next turn in..."
     [3, 2, 1, 0].each do |i|
-      sleep 0.7
+      sleep 0.5
       print "  " + i.to_s
     end
     puts ""
