@@ -2,13 +2,9 @@
 
 # rubocop:disable Metrics/CyclomaticComplexity
 
-require '../lib/users.rb'
-require '../lib/board.rb'
-
 class TicTacToe
-  attr_reader :player_x, :player_o, :board
-  attr_writer :player_x, :player_o
-  attr_accessor :turn, :current_player
+  attr_reader :player_x, :player_o, :board, :turn, :current_player
+  attr_writer :player_x, :player_o, :turn, :current_player
 
   def initialize
     @turn = 0
