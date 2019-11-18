@@ -86,7 +86,7 @@ RSpec.describe Board do
       subject { described_class.new }
       it 'raise an exception if position taken' do
         subject.move('o', 4)
-        expect { subject.move('x', 4) }.to raise_exception('Wrong coordinates')
+        expect { subject.move('x', 4) }.to raise_exception RuntimeError
       end
     end
   end
