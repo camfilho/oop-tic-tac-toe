@@ -13,6 +13,11 @@ RSpec.describe Users do
         expect(subject.name).to eql('Carlos')
       end
 
+      it 'is not equal to old name' do
+        subject.name = 'Carlos'
+        expect(subject.name).not_to eql('Luis')
+      end
+
       it 'should raise an error when changing type' do
         expect { subject.type = 'i' }.to raise_error(
           NoMethodError
@@ -92,11 +97,12 @@ RSpec.describe Board do
   end
 
   describe '#empty?' do
-    context 'When value is not valid' do
+    context 'When coordinate is not valid or taken' do
       subject { described_class.new }
       it 'will return false' do
         expect(subject.empty?(99)).to eql(false)
         expect(subject.empty?('a')).to eql(false)
+        expect(subject.empty?([1, 2, 3, 4])).not_to eql(true)
       end
     end
     context 'When value is valid' do
@@ -116,7 +122,17 @@ RSpec.describe TicTacToe do
         expect(subject.check_winner).to eql(false)
       end
     end
-    context 'when there is a winner movement' do
+    context 'when there is a movement' do
+      it 'not equal true if not met winner requirements' do
+        subject.board.move('x', 1)
+        expect(subject.check_winner).not_to eql(true)
+        subject.board.move('x', 2)
+        expect(subject.check_winner).not_to eql(true)
+        subject.board.move('x', 4)
+        expect(subject.check_winner).not_to eql(true)
+        subject.board.move('x', 5)
+      end
+
       it 'returns true if x or o wins' do
         subject.board.move('x', 1)
         subject.board.move('x', 2)
@@ -130,7 +146,12 @@ RSpec.describe TicTacToe do
       let(:old_player) { subject.current_player.dup }
       it 'switches player' do
         subject.switch_player
-        expect(subject.current_player).to_not eql(old_player)
+        expect(subject.current_player).to_not eql(subject.player_x)
+      end
+
+      it 'is equal to the next player' do
+        subject.switch_player
+        expect(subject.current_player).to eql(subject.player_o)
       end
     end
   end
